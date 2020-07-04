@@ -24,7 +24,47 @@ export default new Router({
           path: "register",
           name: "register",
           component: ()=>import("./views/Register.vue")
-        }
+        },
+        {
+          path: "spot",
+          name: "spot",
+          component: ()=>import("./views/Spot.vue")
+        },
+        {
+          path: "group",
+          name: "group",
+          component: ()=>import("./views/Group.vue")
+        },
+        {
+          path: "managespot",
+          name: "managespot",
+          component: ()=>import("./views/ManageSpot.vue")
+        },
+        {
+          path: "addspot",
+          name: "addspot",
+          component: ()=>import("./views/AddSpot.vue")
+        },
+        {
+          path: "allspot",
+          name: "allspot",
+          component: ()=>import("./views/AllSpot.vue")
+        },
+        {
+          path: "allgroup",
+          name: "allgroup",
+          component: ()=>import("./views/AllGroup.vue")
+        },
+        {
+          path: "managegroup",
+          name: "managegroup",
+          component: ()=>import("./views/ManageGroup.vue")
+        },
+        {
+          path: "addgroup",
+          name: "addgroup",
+          component: ()=>import("./views/AddGroup.vue")
+        },
       ],
       redirect: "/index"
     } 
