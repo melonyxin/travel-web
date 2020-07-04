@@ -88,8 +88,8 @@ export default {
       spotList:null,
       groupList:null,
       showNum:[0,1,2,3],
-      spotNum:[0,1,2,3],
-      groupNum:[0,1],
+      spotNum:[3,2,4,0],
+      groupNum:[0,1,2,3],
     }
   },
   methods:{

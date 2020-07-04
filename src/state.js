@@ -1,8 +1,7 @@
-import axios from 'axios'
 export default {
   data:{
     user: null,
-    url:"http://localhost:3000/",
+    url:"http://39.98.185.10:3000/",
     spotList: null,
     groupList:null,
 
