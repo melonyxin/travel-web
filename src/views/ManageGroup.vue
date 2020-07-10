@@ -4,7 +4,8 @@
       <div class="w-3/4 h-full flex justify-between items-center">
         <h1 class="font-bold text-lg text-teal-500">Tourism</h1>
         <div class="flex text-sm">
-          <span>欢迎！<span class="text-orange-500">{{ user.account }}</span></span>
+          <span>欢迎！<span v-if="user.type == 'tourist'" class="text-orange-500">{{ user.account }}</span>
+          <span v-else class="text-orange-500">{{ user.name }}</span></span>
           <el-link :underline="false" class="ml-6" @click="toAddGroup()">添加旅游团</el-link>
           <el-link :underline="false" class="ml-6" @click="returnIndex()">返回主页</el-link>
           <el-link :underline="false" class="ml-6" @click="logout()">退出登录</el-link>

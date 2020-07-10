@@ -65,6 +65,31 @@ export default new Router({
           name: "addgroup",
           component: ()=>import("./views/AddGroup.vue")
         },
+        {
+          path: "myappointment",
+          name: "myappointment",
+          component: ()=>import("./views/MyAppointment.vue")
+        },
+        {
+          path: "myorder",
+          name: "myorder",
+          component: ()=>import("./views/MyOrder.vue")
+        },
+        {
+          path: "searchresult",
+          name: "searchresult",
+          component: ()=>import("./views/SearchResult.vue")
+        },
+        {
+          path: "allappointment",
+          name: "allappointment",
+          component: ()=>import("./views/AllAppointment.vue")
+        },
+        {
+          path: "allorder",
+          name: "allorder",
+          component: ()=>import("./views/AllOrder.vue")
+        },
       ],
       redirect: "/index"
     } 

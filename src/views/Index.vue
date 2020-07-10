@@ -4,18 +4,27 @@
       <div class="w-3/4 h-full flex justify-between items-center">
         <h1 class="font-bold text-lg text-teal-500">Tourism</h1>
         <div class="flex text-sm">
-          <span>欢迎！<span class="text-orange-500">{{ user.account }}</span></span>
+          <span>欢迎！<span v-if="user.type == 'tourist'" class="text-orange-500">{{ user.account }}</span>
+          <span v-else class="text-orange-500">{{ user.name }}</span></span>
           <el-link v-if="user.type == 'agency'" :underline="false" class="ml-6" @click="manageGroup()">管理旅游团</el-link>
+          <el-link v-if="user.type == 'agency'" :underline="false" class="ml-6" @click="allorder()">订单管理</el-link>
           <el-link v-if="user.type == 'bureau'" :underline="false" class="ml-6" @click="manageSpot()">管理景点</el-link>
-          <el-link v-if="user.type == 'tourist'" :underline="false" class="ml-6">我的预约</el-link>
-          <el-link v-if="user.type == 'tourist'" :underline="false" class="ml-6">我的订单</el-link>
+          <el-link v-if="user.type == 'bureau'" :underline="false" class="ml-6" @click="allappointment()">预约管理</el-link>
+          <el-link v-if="user.type == 'tourist'" :underline="false" class="ml-6" @click="myappointment()">我的预约</el-link>
+          <el-link v-if="user.type == 'tourist'" :underline="false" class="ml-6" @click="myorder()">我的订单</el-link>
           <el-link :underline="false" class="ml-6" @click="logout()">退出登录</el-link>
         </div>
       </div>
     </div>
 
     <div class="w-4/5 flex flex-col items-center bg-white p-10 mt-6">
-      <el-carousel height="500px" class=" w-2/3 mt-4">
+    <div class="flex mb-4 w-full justify-center">
+      <el-input v-model="search_content" placeholder="搜索景点或者旅游团" style="width:35%" class="mr-4"></el-input>
+      <el-button type="primary" @click="search()">搜索</el-button>
+    </div>
+      
+
+      <el-carousel height="400px" class=" w-3/5 mt-4">
         <el-carousel-item v-for="item in showNum" :key="'img'+item">
           <img :src="spotList[item].picture" class="object-fill w-full h-full" />
         </el-carousel-item>
@@ -90,6 +99,7 @@ export default {
       showNum:[0,1,2,3],
       spotNum:[3,2,4,0],
       groupNum:[0,1,2,3],
+      search_content:""
     }
   },
   methods:{
@@ -175,6 +185,31 @@ export default {
     },
     allgroup(){
       this.$router.push('/allgroup')
+    },
+    myappointment(){
+      this.$router.push('/myappointment')
+    },
+    myorder(){
+      this.$router.push('/myorder')
+    },
+    allorder(){
+      this.$router.push('/allorder')
+    },
+    allappointment(){
+      this.$router.push('/allappointment')
+    },
+    search(){
+      if(this.search_content==""){
+        this.$message.error("搜索不能为空")
+        return;
+      }
+      let value = this.search_content;
+      this.$router.push({
+        name:'searchresult',//这个name就是你刚刚配置在router里边的name
+        params:{
+          searchvalue:value
+        }
+      })
     }
   },
   created(){

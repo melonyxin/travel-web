@@ -4,7 +4,8 @@
       <div class="w-3/4 h-full flex justify-between items-center">
         <h1 class="font-bold text-lg text-teal-500">Tourism</h1>
         <div class="flex text-sm">
-          <span>欢迎！<span class="text-orange-500">{{ user.account }}</span></span>
+          <span>欢迎！<span v-if="user.type == 'tourist'" class="text-orange-500">{{ user.account }}</span>
+          <span v-else class="text-orange-500">{{ user.name }}</span></span>
           <el-link v-if="user.type=='bureau' && user.account == spot.bureau_account" :underline="false" class="ml-6" @click="toAddSpot()">修改景点</el-link>
           <el-link :underline="false" class="ml-6" @click="returnIndex()">返回主页</el-link>
           <el-link :underline="false" class="ml-6" @click="logout()">退出登录</el-link>
@@ -19,7 +20,7 @@
         <p class="w-full text-left mt-2 text-xs font-semibold text-teal-500">开放时间：{{spot.open_time}}</p>
         <p class="w-full text-left mt-2 text-xs font-bold text-red-600">最多预约人数：{{spot.maximum}}</p>
         <p class="w-full text-left mt-2 font-light">简介：{{spot.brief}}</p>
-        <p class="w-full text-left mt-2 text-xs text-gray-500">由提供数据</p>
+        <p class="w-full text-left mt-2 text-xs text-gray-500">由{{bureau.name}}提供数据</p>
         <img :src="spot.picture" class="object-fit w-11/12 mt-4" />
       </div>
 
@@ -60,6 +61,7 @@ export default {
         },
       },
       date:null,
+      bureau:null
     }
   },
   methods: {
@@ -120,6 +122,18 @@ export default {
 
     this.user=this.$state.getUser();
     this.spot=this.$route.params.spot;
+    let that = this;
+    let url = this.$state.getUrl()+'bureau/get';
+    let info = {account: this.spot.bureau_account}
+    axios.post(url,info)
+    .then(function(res) {
+      if(res.data.result){
+        that.bureau = res.data.bureau_info;
+      }
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
     console.log(this.spot)
   }
 }

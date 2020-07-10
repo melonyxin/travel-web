@@ -4,7 +4,8 @@
       <div class="w-3/4 h-full flex justify-between items-center">
         <h1 class="font-bold text-lg text-teal-500">Tourism</h1>
         <div class="flex text-sm">
-          <span>欢迎！<span class="text-orange-500">{{ user.account }}</span></span>
+          <span>欢迎！<span v-if="user.type == 'tourist'" class="text-orange-500">{{ user.account }}</span>
+          <span v-else class="text-orange-500">{{ user.name }}</span></span>
           <el-link :underline="false" class="ml-6" @click="logout()">退出登录</el-link>
         </div>
       </div>
@@ -34,7 +35,15 @@
 
         <template v-for="(item,index) in group.consistList">
           <span class="label" :key="'span'+index">景点{{index+1}}：</span>
-          <el-input v-model="item.spot_name" maxlength="20" placeholder="景点" size="small" show-word-limit :key="'name'+index"></el-input>
+          <!-- <el-input v-model="item.spot_name" maxlength="20" placeholder="景点" size="small" show-word-limit :key="'name'+index"></el-input> -->
+          <el-select v-model="item.spot_name" :key="'name'+index" placeholder="请选择景点">
+            <el-option
+              v-for="(item,index) in allSpotName"
+              :key="'spotname'+index"
+              :label="item"
+              :value="item">
+            </el-option>
+          </el-select>
           <el-date-picker
             v-model="item.date"
             type="date"
@@ -85,6 +94,7 @@ export default {
       },
       last_consist:[],
       sendnum:0,
+      allSpotName:[]
     }
   },
   methods:{
@@ -227,6 +237,11 @@ export default {
       }
     }
     
+    let spotList = this.$state.getSpotList();
+    let len = spotList.length;
+    for(let i=0;i<len;i++){
+      this.allSpotName.push(spotList[i].name)
+    }
   }
 }
 </script>
