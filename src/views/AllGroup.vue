@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="w-4/5 flex flex-col items-center bg-white p-10 mt-6">
-      <h1 class="text-left text-2xl font-extrabold border-b-2 pb-4 w-full">全部景点</h1>
+      <h1 class="text-left text-2xl font-extrabold border-b-2 pb-4 w-full">全部旅游团</h1>
 
     <div class="grid grid-cols-4 w-full mt-4  col-gap-4 row-gap-4">
         <div v-for="(item,index) in groupList" :key="index" class="border rounded-lg overflow-hidden max-w-sm shadow-md w-full cursor-pointer" @click="showGroup(index)">

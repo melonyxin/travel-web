@@ -154,7 +154,7 @@ export default {
         for(let i in res){
           that.appointmentList[i].telephone = res[i].data.tourist_info.telephone
         }
-        this.showList = this.appointmentList;
+        that.showList = that.appointmentList;
       })
       console.log(that.appointmentList);
     })
